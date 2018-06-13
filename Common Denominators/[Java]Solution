@@ -1,0 +1,39 @@
+public class Fracts {
+  public static String main(long[][] lst) {
+   String ans1=convertFrac(lst);
+   return ans1;
+  }
+  
+  public static long leaseCommonMultipleTwo(long lst1,long lst2){
+    long multiple =  lst1*lst2;
+    long tmp;
+    long l1=Math.max(lst1,lst2);
+    long l2=Math.min(lst1,lst2);
+    while(l2!=0){
+      tmp = l1%l2;
+      l1 = l2;
+      l2=tmp;
+    }
+     return multiple / l1;
+  }
+  
+  public static long leaseCommonMultipleThree(long[][] lst){
+   if(lst.length==0){
+      lst= new long[][] {{1, 2}, {1, 3}, {1, 4}};
+    }
+    long result=lst[0][1];
+    for(int i=1;i<lst.length;i++){
+       result=leaseCommonMultipleTwo(lst[i][1], result);
+    }
+    return result;
+  }
+  
+  public static String convertFrac(long [][]lst){
+    String result="";
+    long LCM=leaseCommonMultipleThree(lst);
+    for (int i=0;i<lst.length;i++){
+       result=result+"("+(LCM / lst[i][1] * lst[i][0])+","+LCM+")";
+    }
+    return result;
+  }
+}
