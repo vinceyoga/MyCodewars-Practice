@@ -1,0 +1,38 @@
+class Fracts
+{
+
+public:
+    static std::string convertFrac(std::vector<std::vector<unsigned long long>> &lst)
+    {
+        std::string result="";
+        unsigned long long  LCM=leaseCommonMultipleThree(lst);
+        for (int i = 0; i < lst.size(); i++)
+        {
+          result = result + "(" + std::to_string(LCM / lst[i][1] * lst[i][0]) + "," + std::to_string(LCM) + ")";
+        }
+        return result;
+        };
+    static unsigned long long leaseCommonMultipleTwo(unsigned long long lst1,unsigned long long lst2 )
+    {
+        unsigned long long multiple = lst1*lst2;
+        unsigned long long tmp;
+        unsigned long long l1=std::max(lst1,lst2);
+        unsigned long long l2=std::min(lst1,lst2);
+        while (l2)
+        {
+          tmp = l1%l2;
+          l1 = l2;
+          l2=tmp;
+        }
+        return multiple / l1;
+    };
+    static unsigned long long leaseCommonMultipleThree(std::vector<std::vector<unsigned long long>>&lst)
+    {
+     unsigned long  long  result = lst[0][1];
+     for (int i = 1; i < lst.size(); i++)
+     {
+       result= leaseCommonMultipleTwo(lst[i][1], result);
+     }
+        return result;
+    };
+};
